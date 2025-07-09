@@ -1,0 +1,35 @@
+﻿@page "/SfGridWithoutStreamRendering"
+@using Sample.Models
+@using Sample.Services
+@inject OrderService OrderService
+@implements IDisposable
+@inject PersistentComponentState ApplicationState
+
+<h1>Stream Rendering is Not Enabled</h1>
+<br/>
+<SfGrid DataSource="@Orders" TValue="Order">
+    <GridColumns>
+        <GridColumn Field=@nameof(Order.OrderID) HeaderText="Order ID" TextAlign="TextAlign.Right" Width="120"></GridColumn>
+        <GridColumn Field=@nameof(Order.CustomerID) HeaderText="Customer ID" Width="150"></GridColumn>
+        <GridColumn Field=@nameof(Order.OrderDate) HeaderText="Order Date" Format="d" Type="ColumnType.Date" TextAlign="TextAlign.Right" Width="130"></GridColumn>
+        <GridColumn Field=@nameof(Order.Freight) Format="C2" TextAlign="TextAlign.Right" Width="120"></GridColumn>
+        <GridColumn Field=@nameof(Order.ShipCountry) HeaderText="Ship Country" Width="150"></GridColumn>
+    </GridColumns>
+</SfGrid>
+@code {
+    private List<Order> Orders { get; set; }
+    private PersistingComponentStateSubscription persistingSubscription;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var statedLoaded = ApplicationState.TryTakeFromJson<List<Order>>(nameof(Orders), out var restored);
+        Orders = statedLoaded && restored != null ? restored : await OrderService.GetOrdersAsync();
+        persistingSubscription = ApplicationState.RegisterOnPersisting(PersistData);
+    }
+    private Task PersistData()
+    {
+        ApplicationState.PersistAsJson(nameof(Orders), Orders);
+        return Task.CompletedTask;
+    }
+    void IDisposable.Dispose() => persistingSubscription.Dispose();
+}
