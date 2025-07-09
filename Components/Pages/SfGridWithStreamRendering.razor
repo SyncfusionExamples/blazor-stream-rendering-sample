@@ -27,8 +27,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var statedLoaded = ApplicationState.TryTakeFromJson<List<Order>>(nameof(Orders), out var restored);
-        Orders = statedLoaded && restored != null ? restored : await OrderService.GetOrdersAsync();
+        var stateLoaded = ApplicationState.TryTakeFromJson<List<Order>>(nameof(Orders), out var restored);
+        Orders = stateLoaded && restored != null ? restored : await OrderService.GetOrdersAsync();
         persistingSubscription = ApplicationState.RegisterOnPersisting(PersistData);
     }
     private Task PersistData()
