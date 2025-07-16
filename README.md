@@ -13,5 +13,5 @@ The samples requires the below requirements to run.
 ### How to Run
 
 * Clone this repository.
-* Open the command prompt from Application root directory.
-* Run the demo using `dotnet run` command.
+* Open the project(StreamRendering.csproj) in Visual Studio 2022:
+* Run the demo.
