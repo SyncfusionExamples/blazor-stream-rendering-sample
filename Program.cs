@@ -1,5 +1,5 @@
-using Sample.Components;
-using Sample.Services;
+using StreamRendering.Components;
+using StreamRendering.Services;
 using Syncfusion.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);

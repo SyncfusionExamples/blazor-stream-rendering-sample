@@ -1,4 +1,4 @@
-﻿namespace Sample.Models
+﻿namespace StreamRendering.Models
 {
     public class Order
     {

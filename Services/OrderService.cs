@@ -2,8 +2,8 @@
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using Sample.Models;
-namespace Sample.Services
+using StreamRendering.Models;
+namespace StreamRendering.Services
 {   
     public class OrderService
     {
