@@ -14,4 +14,4 @@ The samples requires the below requirements to run.
 
 * Clone this repository.
 * Open the StreamRendering.csproj file using Visual Studio 2022.
-* Press Ctrl + F5 or click the Run button to build and launch the app in your default browser.
+* Press Ctrl + F5 or click the Run button in the toolbar.This will build the application and launch it in your default web browser.
